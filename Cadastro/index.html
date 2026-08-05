@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuarios</title>
+    <link rel="stylesheet" href="Estilo.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Cadastro de Clientes</h1>
+
+        </header>
+        <fieldset>
+            <legend>Cadastrar clientes</legend>
+        <form action="" method="post">
+            <p>
+                <label for="inome">Nome:</label>
+                <input type="text" name="nome" id="inome" required autocomplete="name" maxlength="30">
+            </p>
+            <p>
+                <label for="imail">Email:</label>
+                <input type="email" name="email" id="imail" required autocomplete="email" maxlength="30">
+            </p>
+            <p>
+                <label for="ida">Idade:</label>
+                <input type="number" name="idade" id="ida" min="0" max="120">
+            </p>
+                <p>
+                    <button id="cadastrar">Cadastrar</button>
+                </p>
+        </form>
+        </fieldset>
+    </main>
+    
+</body>
+</html>
