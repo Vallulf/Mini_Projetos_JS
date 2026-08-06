@@ -1,19 +1,31 @@
 
-let cadastrar = document.getElementById('cadastrar')
+let formulario = document.getElementById('formCadastro')
 
 function cadastro (event){
     event.preventDefault()
     
-    let nome = document.getElementById('inome').value
-    let email = document.getElementById('imail').value
-    let idade = document.getElementById('ida').value
+    let Campnome = document.getElementById('inome')
+    let Campemail = document.getElementById('imail')
+    let Campidade = document.getElementById('ida')
+
+    let nome = Campnome.value
+    let email = Campemail.value
+    let idade = Campidade.value
 
     if ( nome !== '' && email !== '' && idade !== ''){
         alert(`Nome: ${nome}
                Email: ${email}
                Idade: ${idade}`)
+               
+               Campnome.value=''
+               Campemail.value=''
+               Campidade.value=''
+
+            Campnome.focus()
+    }else{
+        alert('Preencha todos os campos')
     }
 }
 
 
-cadastrar.addEventListener('click' , cadastro)
+formulario.addEventListener('submit' , cadastro)
