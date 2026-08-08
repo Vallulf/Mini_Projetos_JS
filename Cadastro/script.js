@@ -14,8 +14,7 @@ async function cadastro (event){
 
     if ( nome !== '' && email !== '' && idade !== ''){
 
-        const { data, error } = await supabase
-            .from('cadastro')
+        const { data, error } = await window.supabaseClient.from('cadastro')
             .insert([
                  {
             nome: nome,
