@@ -1,7 +1,7 @@
 
 let formulario = document.getElementById('formCadastro')
 
-function cadastro (event){
+async function cadastro (event){
     event.preventDefault()
     
     let Campnome = document.getElementById('inome')
@@ -13,6 +13,18 @@ function cadastro (event){
     let idade = Campidade.value
 
     if ( nome !== '' && email !== '' && idade !== ''){
+
+        const { data, error } = await supabase
+            .from('cadastro')
+            .insert([
+                 {
+            nome: nome,
+            email: email,
+            idade: idade
+                
+        
+        }
+        ]);
         alert(`Nome: ${nome}
                Email: ${email}
                Idade: ${idade}`)
