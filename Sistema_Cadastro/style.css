@@ -1,41 +1,209 @@
-@charset "uft-8";
+/* ==========================================================================
+   Sistema de Cadastro — style.css
+   Paleta: slate profundo + acento âmbar (referência a terminal/editor de código)
+   ========================================================================== */
 
-*{
-    padding: 0px;
-    margin: 0px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-body{
-     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: cadetblue;
-}
-header, legend{
-    color: white;
-    
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg-deep: #0b1220;
+  --bg-panel: #121b2e;
+  --bg-field: #0e1626;
+  --border: #24304a;
+  --border-focus: #f5a524;
+  --text-primary: #e8ecf4;
+  --text-muted: #8b98b3;
+  --accent: #f5a524;
+  --accent-dim: #b97b1a;
+  --accent-soft: rgba(245, 165, 36, 0.12);
+  --success: #34d399;
+  --radius: 10px;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
+* {
+  box-sizing: border-box;
+}
 
-form > p{
-    padding-top: 10px;
-    padding-bottom: 10px;
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(245, 165, 36, 0.08), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(52, 211, 153, 0.06), transparent 45%),
+    var(--bg-deep);
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
 }
-form{
-    background-color: lightcyan;
-    height: 200px;
-    width: 350px;
+
+main {
+  width: 100%;
+  max-width: 460px;
 }
-input{
-    width: 90%;
+
+/* ---------- Header ---------- */
+
+header {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
-button{
-    height: 20px;
-    background-color: green;
-    color: white;
+
+header::before,
+header::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to right, transparent, var(--border));
 }
-button:hover{
-    background-color: red;
-    box-shadow: 2px 2px 5px black;
+
+header::after {
+  background: linear-gradient(to left, transparent, var(--border));
+}
+
+/* ---------- Painel / fieldset ---------- */
+
+fieldset {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px 28px 28px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 20px 40px -20px rgba(0, 0, 0, 0.6);
+}
+
+legend {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  padding: 0 10px;
+  color: var(--text-primary);
+}
+
+legend::first-letter {
+  color: var(--accent);
+}
+
+/* ---------- Formulário ---------- */
+
+form p {
+  margin: 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+
+input {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-primary);
+  background: var(--bg-field);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+input::placeholder {
+  color: #4b5a78;
+}
+
+input:hover {
+  border-color: #3a4a6b;
+}
+
+input:focus {
+  border-color: var(--border-focus);
+  background: #0f1830;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+input:valid:not(:placeholder-shown) {
+  border-color: rgba(52, 211, 153, 0.4);
+}
+
+input:required:invalid:not(:placeholder-shown) {
+  border-color: #e5484d;
+}
+
+/* ---------- Botão ---------- */
+
+button[type="submit"] {
+  width: 100%;
+  margin-top: 6px;
+  padding: 13px 18px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: #14100a;
+  background: linear-gradient(180deg, #ffc069, var(--accent));
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  box-shadow: 0 8px 20px -8px rgba(245, 165, 36, 0.55);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+button[type="submit"]:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -8px rgba(245, 165, 36, 0.65);
+}
+
+button[type="submit"]:active {
+  transform: translateY(0);
+  filter: brightness(0.97);
+}
+
+button[type="submit"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 480px) {
+  fieldset {
+    padding: 26px 20px 22px;
+    border-radius: 14px;
+  }
+
+  legend {
+    font-size: 19px;
+  }
+}
+
+/* ---------- Movimento reduzido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }
