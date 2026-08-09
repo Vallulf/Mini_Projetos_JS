@@ -1,0 +1,41 @@
+@charset "uft-8";
+
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: cadetblue;
+}
+header, legend{
+    color: white;
+    
+}
+
+
+form > p{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+form{
+    background-color: lightcyan;
+    height: 200px;
+    width: 350px;
+}
+input{
+    width: 90%;
+}
+button{
+    height: 20px;
+    background-color: green;
+    color: white;
+}
+button:hover{
+    background-color: red;
+    box-shadow: 2px 2px 5px black;
+}
