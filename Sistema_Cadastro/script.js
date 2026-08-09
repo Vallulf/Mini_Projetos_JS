@@ -14,10 +14,18 @@ async function cadastrar(event) {
 
     if ( nome !== '' && email !== '' && telefone !==''){
 
+        const{data , error} = await supabaseClient
+        .from('clientes')
+        .insert({
+            nome: nome,
+            email: email,
+            telefone: telefone
+        })
+        if(error){
+            console.error(error)
+            return
 
-        window.alert(`Nome:${nome}
-               E-mail:${email}
-               Telefone:${telefone}`)
+        }
 
             campoNome.value = ''
             campoEmail.value = ''
@@ -30,7 +38,18 @@ async function cadastrar(event) {
     }
     
 }
+async function ListarClientes(event) {
+    const {data , error } = await supabaseClient
+    .from('clientes')
+    .select(
 
+    )
+    if(error){
+        console.error(error)
+        return
+    }
+    console.log(data)
+}
 
 
 
@@ -38,3 +57,4 @@ async function cadastrar(event) {
 
 
 formulario.addEventListener('submit', cadastrar)
+ListarClientes()
