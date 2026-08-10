@@ -41,14 +41,39 @@ async function cadastrar(event) {
 async function ListarClientes(event) {
     const {data , error } = await supabaseClient
     .from('clientes')
-    .select(
-
-    )
+    .select()
     if(error){
         console.error(error)
         return
     }
-    console.log(data)
+    let ListaClientes = document.getElementById('listarClientes')
+
+    data.forEach( cliente => {
+
+        let linha = document.createElement('tr')
+
+        let celulaId = document.createElement('td')
+        celulaId.textContent = cliente.id
+        linha.appendChild(celulaId)
+
+        let celulaNome = document.createElement('td')
+
+        celulaNome.textContent = cliente.nome
+        linha.appendChild(celulaNome)
+
+        let celulaEmail = document.createElement('td')
+        
+        celulaEmail.textContent = cliente.email
+        linha.appendChild(celulaEmail)
+
+        let celulaTel = document.createElement('td')
+        celulaTel.textContent = cliente.telefone
+        linha.appendChild(celulaTel)
+        ListaClientes.appendChild(linha)
+
+
+        
+    });
 }
 
 
