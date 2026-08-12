@@ -75,11 +75,30 @@ async function ListarClientes(event) {
         
     });
 }
+async function atualizar() {
+    let campoNome = document.getElementById('nome')
+    let campoEmail = document.getElementById('email')
+    let campoTelefone = document.getElementById('telefone')
 
+    const{data, error} = await supabaseClient
+    .from('clientes')
+    .update({
+        nome: campoNome.value,
+        email: campoEmail.value,
+        telefone: campoTelefone.value
+    })
+    .eq('id', 25)
 
+    if(error){
+        console.log(error)
+        return
+    }
+
+}
 
 
 
 
 formulario.addEventListener('submit', cadastrar)
 ListarClientes()
+atualizar()
