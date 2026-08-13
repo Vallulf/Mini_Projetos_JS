@@ -46,7 +46,7 @@ async function ListarClientes(event) {
         console.error(error)
         return
     }
-    let ListaClientes = document.getElementById('listarClientes')
+    let read = document.getElementById('listarClientes')
 
     data.forEach( cliente => {
 
@@ -69,7 +69,7 @@ async function ListarClientes(event) {
         let celulaTel = document.createElement('td')
         celulaTel.textContent = cliente.telefone
         linha.appendChild(celulaTel)
-        ListaClientes.appendChild(linha)
+        read.appendChild(linha)
 
 
         
@@ -83,11 +83,11 @@ async function atualizar() {
     const{data, error} = await supabaseClient
     .from('clientes')
     .update({
-        nome: campoNome.value,
+        nome: 'othavio',
         email: campoEmail.value,
         telefone: campoTelefone.value
     })
-    .eq('id', 25)
+    .eq('id',27)
 
     if(error){
         console.log(error)
@@ -99,6 +99,7 @@ async function atualizar() {
 
 
 
+
 formulario.addEventListener('submit', cadastrar)
 ListarClientes()
-atualizar()
+atualizar(
