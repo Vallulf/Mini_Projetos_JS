@@ -1,8 +1,14 @@
 let formulario = document.getElementById('formulario')
+let idclienteEditando = null
 
 async function cadastrar(event) {
 
     event.preventDefault()
+    
+    if (idclienteEditando !== null) {
+        await atualizar()
+        return
+    }
 
     let campoNome = document.getElementById('nome')
     let campoEmail = document.getElementById('email')
@@ -47,6 +53,7 @@ async function ListarClientes(event) {
         return
     }
     let read = document.getElementById('listarClientes')
+    read.innerHTML=''
 
     data.forEach( cliente => {
 
@@ -69,10 +76,28 @@ async function ListarClientes(event) {
         let celulaTel = document.createElement('td')
         celulaTel.textContent = cliente.telefone
         linha.appendChild(celulaTel)
-        read.appendChild(linha)
+         
 
-
+        let celulaAcao =document.createElement('td')
+        let botaoEditar = document.createElement('button')
+        botaoEditar.textContent  = 'Editar'
         
+        celulaAcao.appendChild(botaoEditar)
+        linha.appendChild(celulaAcao)
+
+        botaoEditar.addEventListener('click', () =>{
+            let campoNome = document.getElementById('nome')
+            let campoEmail = document.getElementById('email')
+            let campoTelefone = document.getElementById('telefone')
+
+            campoNome.value = cliente.nome
+            campoEmail.value = cliente.email
+            campoTelefone.value = cliente.telefone
+
+            idclienteEditando = cliente.id
+        })
+
+       read.appendChild(linha) 
     });
 }
 async function atualizar() {
@@ -83,16 +108,23 @@ async function atualizar() {
     const{data, error} = await supabaseClient
     .from('clientes')
     .update({
-        nome: 'othavio',
+        nome: campoNome.value,
         email: campoEmail.value,
         telefone: campoTelefone.value
     })
-    .eq('id',27)
+    .eq('id', idclienteEditando)
 
     if(error){
         console.log(error)
         return
     }
+    campoNome.value= ''
+    campoEmail.value=''
+    campoTelefone.value= ''
+
+    idclienteEditando = null
+    ListarClientes()
+    
 
 }
 
@@ -102,4 +134,3 @@ async function atualizar() {
 
 formulario.addEventListener('submit', cadastrar)
 ListarClientes()
-atualizar(
