@@ -149,6 +149,7 @@ async function excluir (id) {
         console.log(error)
         return
     }
+    ListarClientes()
 
     
 }
