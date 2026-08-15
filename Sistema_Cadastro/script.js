@@ -53,6 +53,7 @@ async function ListarClientes(event) {
         return
     }
     let read = document.getElementById('listarClientes')
+
     read.innerHTML=''
 
     data.forEach( cliente => {
@@ -85,6 +86,11 @@ async function ListarClientes(event) {
         celulaAcao.appendChild(botaoEditar)
         linha.appendChild(celulaAcao)
 
+        let botaoExcluir = document.createElement('button')
+        botaoExcluir.textContent = 'Excluir'
+
+        celulaAcao.appendChild(botaoExcluir)
+
         botaoEditar.addEventListener('click', () =>{
             let campoNome = document.getElementById('nome')
             let campoEmail = document.getElementById('email')
@@ -96,6 +102,13 @@ async function ListarClientes(event) {
 
             idclienteEditando = cliente.id
         })
+        botaoExcluir.addEventListener('click', () =>{
+            let confirmar = confirm("Tem certeza que deseja excluir este cliente?")
+            if(confirmar){
+            excluir(cliente.id)
+            }
+        })
+
 
        read.appendChild(linha) 
     });
@@ -126,6 +139,18 @@ async function atualizar() {
     ListarClientes()
     
 
+}
+async function excluir (id) {
+    const {data , error} = await supabaseClient
+    .from ('clientes')
+    .delete()
+    .eq ('id' , id )
+    if (error){
+        console.log(error)
+        return
+    }
+
+    
 }
 
 
